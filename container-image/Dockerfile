@@ -3,11 +3,16 @@ FROM registry.access.redhat.com/ubi8/openjdk-11
 MAINTAINER Álvaro López<alopezme@redhat.com>
 ENV JMETER_VERSION "5.5"
 
-# Install wget to download unzip
+
+USER root
+
 RUN microdnf install -y wget && \
     wget https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/u/unzip-6.0-43.el8.x86_64.rpm && \
     rpm -ivh unzip-6.0-43.el8.x86_64.rpm && \
     rm unzip-6.0-43.el8.x86_64.rpm
+
+# Switch back to the non-privileged user
+USER 1001
 
 LABEL jmeter.version=${JMETER_VERSION}
 
