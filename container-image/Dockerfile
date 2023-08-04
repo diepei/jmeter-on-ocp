@@ -3,6 +3,10 @@ FROM registry.access.redhat.com/ubi8/openjdk-11
 MAINTAINER Álvaro López<alopezme@redhat.com>
 ENV JMETER_VERSION "5.5"
 
+# Update package lists and install unzip
+RUN apk update && \
+    apk add unzip
+
 LABEL jmeter.version=${JMETER_VERSION}
 
 # Set JMeter base and home
