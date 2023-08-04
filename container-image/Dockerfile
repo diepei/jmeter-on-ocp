@@ -3,9 +3,14 @@ FROM registry.access.redhat.com/ubi8/openjdk-11
 MAINTAINER Álvaro López<alopezme@redhat.com>
 ENV JMETER_VERSION "5.5"
 
+USER root
+
 # Install unzip using microdnf
 RUN microdnf install -y unzip && \
     microdnf clean all
+
+# Switch back to the non-privileged user
+USER 1001
 
 LABEL jmeter.version=${JMETER_VERSION}
 
