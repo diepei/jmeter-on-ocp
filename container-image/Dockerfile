@@ -17,7 +17,7 @@ RUN mkdir -p $JMETER_BASE/{tests,results}
 # Option 1: Download latest jmeter binaries from the Apache archive:
 RUN pwd
 RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz -o /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
-    tar -xzf /tmp/apache-jmeter-${JMETER_VERSION}.tgz -d $JMETER_BASE && \
+    tar -xf /tmp/apache-jmeter-${JMETER_VERSION}.tgz -d $JMETER_BASE && \
     rm -f /tmp/apache-jmeter-${JMETER_VERSION}.tgz
 RUN pwd
 
