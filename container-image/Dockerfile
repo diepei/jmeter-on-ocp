@@ -16,15 +16,9 @@ RUN mkdir -p $JMETER_BASE/{tests,results}
 
 # Option 1: Download latest jmeter binaries from the Apache archive:
 RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.zip -o apache-jmeter-${JMETER_VERSION}.tgz
-RUN cd $JMETER_BASE
-#RUN unzip ~/apache-jmeter-${JMETER_VERSION}.zip
-RUN tar -xzf ~/apache-jmeter-${JMETER_VERSION}.tgz
-RUN rm -rf apache-jmeter-${JMETER_VERSION}.tgz
-
-# Option 2: If you don't have internet access from the build machine use COPY instead of curl. In this case, you will need the binaries in the same folder as this Dockerfile.
-# COPY apache-jmeter-${JMETER_VERSION}.tgz $JMETER_BASE
-# RUN tar -xf $JMETER_BASE/apache-jmeter-${JMETER_VERSION}.tgz -C $JMETER_BASE \
-#     && rm -rf $JMETER_BASE/apache-jmeter-${JMETER_VERSION}.tgz
+COPY apache-jmeter-${JMETER_VERSION}.tgz $JMETER_BASE
+RUN tar -xf $JMETER_BASE/apache-jmeter-${JMETER_VERSION}.tgz -C $JMETER_BASE \
+    && rm -rf $JMETER_BASE/apache-jmeter-${JMETER_VERSION}.tgz
 
 ############# ARE PLUGINS NEEDED?
 # COPY binaries/JMeterPlugins-ExtrasLibs-1.4.0.zip $JMETER_BASE/apache-jmeter-${JMETER_VERSION}/
