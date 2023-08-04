@@ -3,10 +3,6 @@ FROM registry.access.redhat.com/ubi8/openjdk-11
 MAINTAINER Álvaro López<alopezme@redhat.com>
 ENV JMETER_VERSION "5.5"
 
-# Update package lists and install unzip
-RUN apk update && \
-    apk add unzip
-
 LABEL jmeter.version=${JMETER_VERSION}
 
 # Set JMeter base and home
@@ -19,10 +15,11 @@ ENV PATH $JMETER_HOME/bin:$PATH
 RUN mkdir -p $JMETER_BASE/{tests,results}
 
 # Option 1: Download latest jmeter binaries from the Apache archive:
-RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.zip -o apache-jmeter-${JMETER_VERSION}.zip
+RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.zip -o apache-jmeter-${JMETER_VERSION}.tgz
 RUN cd $JMETER_BASE
-RUN unzip ~/apache-jmeter-${JMETER_VERSION}.zip
-RUN rm -rf apache-jmeter-${JMETER_VERSION}.zip
+#RUN unzip ~/apache-jmeter-${JMETER_VERSION}.zip
+RUN tar -xzf ~/apache-jmeter-${JMETER_VERSION}.tgz
+RUN rm -rf apache-jmeter-${JMETER_VERSION}.tgz
 
 # Option 2: If you don't have internet access from the build machine use COPY instead of curl. In this case, you will need the binaries in the same folder as this Dockerfile.
 # COPY apache-jmeter-${JMETER_VERSION}.tgz $JMETER_BASE
