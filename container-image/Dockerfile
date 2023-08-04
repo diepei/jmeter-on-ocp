@@ -3,6 +3,8 @@ FROM registry.access.redhat.com/ubi8/openjdk-11
 MAINTAINER Álvaro López<alopezme@redhat.com>
 ENV JMETER_VERSION "5.5"
 
+RUN dnf install -y unzip
+
 LABEL jmeter.version=${JMETER_VERSION}
 
 # Set JMeter base and home
@@ -14,9 +16,9 @@ ENV PATH $JMETER_HOME/bin:$PATH
 # Create jmeter directory with tests and results folder and install JMeter
 RUN mkdir -p $JMETER_BASE/{tests,results}
 # Option 1: Download latest jmeter binaries from the Apache archive:
-RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz -o apache-jmeter-${JMETER_VERSION}.tgz \
-    && tar -xzf apache-jmeter-${JMETER_VERSION}.tgz -C $JMETER_BASE --strip-components=1 \
-    && rm -f apache-jmeter-${JMETER_VERSION}.tgz
+RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.zip -o apache-jmeter-${JMETER_VERSION}.zip \
+    && unzip apache-jmeter-${JMETER_VERSION}.zip -d $JMETER_BASE \
+    && rm -f apache-jmeter-${JMETER_VERSION}.zip
 
 ############# ARE PLUGINS NEEDED?
 # COPY binaries/JMeterPlugins-ExtrasLibs-1.4.0.zip $JMETER_BASE/apache-jmeter-${JMETER_VERSION}/
