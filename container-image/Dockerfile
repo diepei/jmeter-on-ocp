@@ -6,10 +6,9 @@ ENV JMETER_VERSION "5.5"
 
 USER root
 
-RUN microdnf install -y wget && \
-    wget https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/u/unzip-6.0-43.el8.x86_64.rpm && \
-    rpm -ivh unzip-6.0-43.el8.x86_64.rpm && \
-    rm unzip-6.0-43.el8.x86_64.rpm
+# Install unzip using microdnf
+RUN microdnf install -y unzip && \
+    microdnf clean all
 
 # Switch back to the non-privileged user
 USER 1001
