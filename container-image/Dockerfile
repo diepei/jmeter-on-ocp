@@ -15,10 +15,11 @@ ENV PATH $JMETER_HOME/bin:$PATH
 RUN mkdir -p $JMETER_BASE/{tests,results}
 
 # Option 1: Download latest jmeter binaries from the Apache archive:
-RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz -o apache-jmeter-${JMETER_VERSION}.tgz \
-    && tar -xvf $JMETER_BASE/apache-jmeter-${JMETER_VERSION}.tgz -C $JMETER_BASE \
-    && rm apache-jmeter-${JMETER_VERSION}.tgz
-
+RUN pwd
+RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz -o /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
+    tar -xzf /tmp/apache-jmeter-${JMETER_VERSION}.tgz -d $JMETER_BASE && \
+    rm -f /tmp/apache-jmeter-${JMETER_VERSION}.tgz
+RUN pwd
 
 ############# ARE PLUGINS NEEDED?
 # COPY binaries/JMeterPlugins-ExtrasLibs-1.4.0.zip $JMETER_BASE/apache-jmeter-${JMETER_VERSION}/
