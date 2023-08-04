@@ -13,7 +13,7 @@ ENV PATH $JMETER_HOME/bin:$PATH
 
 # Create jmeter directory with tests and results folder and install JMeter
 RUN mkdir -p $JMETER_BASE/{tests,results}
-RUN 
+RUN zip -v
 # Option 1: Download latest jmeter binaries from the Apache archive:
 RUN curl -SL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.zip -o apache-jmeter-${JMETER_VERSION}.zip \
     && unzip apache-jmeter-${JMETER_VERSION}.zip -d $JMETER_BASE \
