@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/openjdk-11
 MAINTAINER Álvaro López<alopezme@redhat.com>
 ENV JMETER_VERSION "5.5"
 
-RUN dnf install -y unzip
+RUN yum install -y unzip
 
 LABEL jmeter.version=${JMETER_VERSION}
 
